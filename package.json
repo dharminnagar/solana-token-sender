@@ -1,0 +1,49 @@
+{
+  "name": "solana-token-sender",
+  "version": "1.0.0",
+  "description": "Interactive CLI tool to send SPL tokens on Solana",
+  "main": "dist/cli.js",
+  "bin": {
+    "solana-token-sender": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "bun build src/cli.ts --outdir dist --target node --format esm",
+    "start": "node dist/cli.js",
+    "dev": "bun run src/cli.ts",
+    "test": "bun test",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write src/**/*.ts",
+    "prepublishOnly": "bun run build"
+  },
+  "keywords": [
+    "solana",
+    "cli",
+    "token",
+    "spl",
+    "blockchain",
+    "cryptocurrency"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "@solana/spl-token": "^0.3.9",
+    "@solana/web3.js": "^1.87.6",
+    "bs58": "^6.0.0",
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0",
+    "inquirer": "^9.2.12"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.10",
+    "@types/inquirer": "^9.0.7",
+    "@types/jest": "^29.5.8",
+    "typescript": "^5.2.2",
+    "ts-node": "^10.9.1",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "eslint": "^8.52.0",
+    "@typescript-eslint/eslint-plugin": "^6.9.1",
+    "@typescript-eslint/parser": "^6.9.1",
+    "prettier": "^3.0.3"
+  }
+}
