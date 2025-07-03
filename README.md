@@ -1,6 +1,6 @@
 # Solana Token Sender CLI
 
-An interactive command-line tool for sending SPL tokens on the Solana blockchain. Features an intuitive interface with prompts, validation, and support for both mainnet and devnet.
+An interactive command-line tool for sending Native & SPL tokens on the Solana blockchain. Features an intuitive interface with prompts, validation, and support for both mainnet and devnet.
 
 ## Features
 
