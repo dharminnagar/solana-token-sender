@@ -67,7 +67,7 @@ function validatePrivateKey(input: string): boolean | string {
     return 'Invalid JSON array format. Must be 64 numbers between 0-255';
   } catch {
     // If JSON parsing fails, try Base58 format
-    if (typeof input === 'string' && input.length >= 43 && input.length <= 44) {
+    if (typeof input === 'string') {
       // Basic Base58 character check
       const base58Regex = /^[1-9A-HJ-NP-Za-km-z]+$/;
       if (base58Regex.test(input)) {
