@@ -5,6 +5,7 @@ import inquirer from 'inquirer';
 import chalk from 'chalk';
 import { sendToken } from './commands/send';
 import { validatePublicKey, validateAmount, validateMintAddress } from './lib/validation';
+import figlet from 'figlet';
 
 const program = new Command();
 
@@ -35,6 +36,21 @@ const commonMints = {
   }
 };
 
+function displayBanner() {
+  console.log("\n" + chalk.bold.cyan(
+            figlet.textSync("Send Token", {
+                font: "Standard",
+                horizontalLayout: "default",
+                verticalLayout: "default",
+                width: 100,
+                whitespaceBreak: true
+            })
+        ));
+  console.log(chalk.blue.bold('🚀 Interactive CLI tool for sending Native & SPL tokens on Solana'));
+  console.log(chalk.gray('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
+  console.log();
+}
+
 function validatePrivateKey(input: string): boolean | string {
   try {
     // First, try to parse as JSON array
@@ -51,7 +67,7 @@ function validatePrivateKey(input: string): boolean | string {
     return 'Invalid JSON array format. Must be 64 numbers between 0-255';
   } catch {
     // If JSON parsing fails, try Base58 format
-    if (typeof input === 'string') {
+    if (typeof input === 'string' && input.length >= 43 && input.length <= 44) {
       // Basic Base58 character check
       const base58Regex = /^[1-9A-HJ-NP-Za-km-z]+$/;
       if (base58Regex.test(input)) {
@@ -63,7 +79,7 @@ function validatePrivateKey(input: string): boolean | string {
 }
 
 async function promptForSendToken(): Promise<SendTokenAnswers> {
-  console.log(chalk.blue.bold('\n🚀 Solana Token Sender CLI\n'));
+  displayBanner();
   
   const answers = await inquirer.prompt([
     {
@@ -189,13 +205,14 @@ program
   .command('help')
   .description('Show help information')
   .action(() => {
-    console.log(chalk.blue.bold('\n🚀 Solana Token Sender CLI Help\n'));
+    displayBanner();
     console.log(chalk.white('Commands:'));
     console.log(chalk.cyan('  send    ') + 'Send SPL tokens interactively');
     console.log(chalk.cyan('  help    ') + 'Show this help information');
     console.log(chalk.white('\nUsage:'));
-    console.log(chalk.gray('  npx solana-token-sender send'));
-    console.log(chalk.gray('  npx solana-token-sender help'));
+    console.log(chalk.gray('  bun run dev'));
+    console.log(chalk.gray('  bun run dev send'));
+    console.log(chalk.gray('  bun run dev help'));
     console.log(chalk.white('\nSecurity Notes:'));
     console.log(chalk.yellow('  • Never share your private key'));
     console.log(chalk.yellow('  • Always test on devnet first'));
